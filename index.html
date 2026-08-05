@@ -1,0 +1,1791 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Jonna Films: Real Films Made By Real Filmmakers</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400;1,600&family=Montserrat:wght@300;400;500;600&family=Special+Elite&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --ivory:#f8f5ef;
+  --parchment:#f0ebe0;
+  --cream:#e8e1d3;
+  --dark:#1a1714;
+  --charcoal:#2c2825;
+  --crimson:#9b1c1c;
+  --crimson2:#c0392b;
+  --gold:#8b6914;
+  --warm-grey:#7a736a;
+  --border:rgba(26,23,20,.12);
+}
+html{scroll-behavior:smooth}
+body{font-family:'Montserrat',sans-serif;background:var(--ivory);color:var(--charcoal);overflow-x:hidden}
+
+/* ── SCROLL REVEALS ── */
+.reveal{opacity:0;transform:translateY(44px);transition:opacity .85s cubic-bezier(.22,1,.36,1),transform .85s cubic-bezier(.22,1,.36,1)}
+.reveal.visible{opacity:1;transform:translateY(0)}
+.reveal-l{opacity:0;transform:translateX(-52px);transition:opacity .85s cubic-bezier(.22,1,.36,1),transform .85s cubic-bezier(.22,1,.36,1)}
+.reveal-l.visible{opacity:1;transform:translateX(0)}
+.reveal-r{opacity:0;transform:translateX(52px);transition:opacity .85s cubic-bezier(.22,1,.36,1),transform .85s cubic-bezier(.22,1,.36,1)}
+.reveal-r.visible{opacity:1;transform:translateX(0)}
+.d1{transition-delay:.1s}.d2{transition-delay:.2s}.d3{transition-delay:.3s}.d4{transition-delay:.4s}.d5{transition-delay:.5s}
+
+/* ── NAV ── */
+nav{
+  position:fixed;top:0;left:0;right:0;z-index:300;
+  display:flex;align-items:center;justify-content:space-between;
+  padding:22px 56px;
+  background:rgba(248,245,239,.96);
+  backdrop-filter:blur(14px);
+  border-bottom:1px solid var(--border);
+  transition:padding .4s,box-shadow .4s;
+}
+.nav-logo img{
+  height: 100%;
+}
+.nav-links a{
+  font-family: 'Cormorant Garamond',serif;
+}
+nav.scrolled{padding:13px 56px;box-shadow:0 2px 28px rgba(0,0,0,.07)}
+.nav-logo{font-family:'Cormorant Garamond',serif;font-size:1.3rem;font-weight:400;letter-spacing:.14em;text-transform:uppercase;color:var(--dark);text-decoration:none;  height: 70px;}
+.nav-logo span{color:var(--crimson)}
+.nav-links{display:flex;align-items:center;gap:30px;list-style:none}
+.nav-links a{font-size:.63rem;letter-spacing:.18em;text-transform:uppercase;color:black;text-decoration:none;position:relative;padding-bottom:3px;transition:color .25s; font-weight: 900; font-size: 13px;}
+.nav-links a::after{content:'';position:absolute;bottom:0;left:0;width:0;height:1px;background:var(--crimson);transition:width .3s}
+.nav-links a:hover{color:var(--dark)}.nav-links a:hover::after{width:100%}
+.nav-cta{font-size:.6rem;letter-spacing:.2em;text-transform:uppercase;padding:10px 24px;border:1.5px solid var(--crimson);color:var(--crimson);text-decoration:none;transition:all .25s}
+.nav-cta:hover{background:var(--crimson);color:#fff}
+.hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer}
+.hamburger span{width:22px;height:1.5px;background:var(--dark)}
+
+/* ── HERO ── */
+.hero{height:100vh;position:relative;overflow:hidden;display:flex;align-items:flex-end}
+.hero-bg{position:absolute;inset:0;width:100%;height:110%;object-fit:cover;object-position:center 25%;animation:heroZoom 14s ease-out forwards}
+@keyframes heroZoom{from{transform:scale(1.1)}to{transform:scale(1)}}
+.hero-overlay{position:absolute;inset:0;background:linear-gradient(to top,rgba(248,245,239,.92) 0%,rgba(248,245,239,.15) 50%,transparent 80%)}
+@media (max-width: 768px){
+  .hero-bg{height:100%;object-position:center center}
+}
+.hero-content{position:relative;z-index:2;padding:80px 80px 100px}
+.hero-tag{font-size:.6rem; font-weight:900;letter-spacing:.35em;text-transform:uppercase;background:var(--crimson);color: white; padding: 5px; display:block;margin-bottom:18px;opacity:0;animation:fadeUp .7s .4s forwards}
+.hero-title{font-family:'Cormorant Garamond',serif;font-size:62px;font-weight:900;line-height:1.05;color:var(--dark);opacity:0;animation:fadeUp .9s .65s forwards; text-transform: uppercase;}
+.hero-title em{font-style:italic;color:var(--crimson)}
+.hero-sub{font-size:.72rem;letter-spacing:.07em;line-height:1.9;color:var(--warm-grey);margin:22px 0 38px;max-width:400px;opacity:0;animation:fadeUp .9s .9s forwards; font-weight: 900;}
+.hero-btns{display:flex;gap:14px;opacity:0;animation:fadeUp .9s 1.1s forwards}
+@keyframes fadeUp{from{opacity:0;transform:translateY(22px)}to{opacity:1;transform:translateY(0)}}
+.scroll-hint{position:absolute;bottom:36px;right:60px;z-index:2;display:flex;flex-direction:column;align-items:center;gap:8px;opacity:0;animation:fadeIn 1s 1.7s forwards}
+@keyframes fadeIn{to{opacity:1}}
+.scroll-hint span{font-size:.52rem;letter-spacing:.25em;text-transform:uppercase;color:var(--warm-grey)}
+.scroll-line{width:1px;height:56px;background:var(--border);position:relative;overflow:hidden}
+.scroll-line::after{content:'';position:absolute;top:-100%;left:0;width:100%;height:100%;background:var(--crimson);animation:scrollDown 1.5s 2s infinite}
+@keyframes scrollDown{to{top:200%}}
+
+.btn-primary{padding:14px 38px;background:var(--crimson);color:#fff;font-size:.63rem;letter-spacing:.22em;text-transform:uppercase;text-decoration:none;display:inline-block;transition:background .25s,transform .2s}
+.btn-primary:hover{background:var(--crimson2);transform:translateY(-2px)}
+.btn-ghost{padding:14px 38px;border:1.5px solid var(--charcoal);color:var(--charcoal);font-size:.63rem;letter-spacing:.22em;text-transform:uppercase;text-decoration:none;display:inline-block;transition:all .25s}
+.btn-ghost:hover{background:var(--charcoal);color:var(--ivory);transform:translateY(-2px)}
+
+/* ── TICKER ── */
+.ticker-wrap{overflow:hidden;padding:16px 0;border-top:1px solid var(--border);border-bottom:1px solid var(--border);background:var(--parchment)}
+.ticker-inner{display:flex;white-space:nowrap;animation:ticker 28s linear infinite}
+.ticker-inner:hover{animation-play-state:paused}
+@keyframes ticker{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+.ticker-item{font-family:'Cormorant Garamond',serif;font-size:1.05rem;font-weight:300;font-style:italic;color:var(--warm-grey);padding:0 44px;display:inline-block}
+.ticker-dot{color:var(--crimson);margin-right:44px}
+
+/* ════════════════════════════════
+   1. FILM REEL SECTION
+════════════════════════════════ */
+.reel-section{background:var(--dark);padding:0;overflow:hidden;position:relative}
+.reel-header{padding:80px 64px 48px;text-align:center}
+.reel-header .section-label{color:var(--crimson);font-size:.58rem;letter-spacing:.38em;text-transform:uppercase;margin-bottom:12px}
+.reel-header h2{font-family:'Cormorant Garamond',serif;font-size:clamp(2rem,4vw,3.5rem);font-weight:300;color:#fff;line-height:1.1}
+.reel-header h2 em{font-style:italic;color:rgba(255,255,255,.35)}
+
+/* Film strip wrapper – TWO rows scrolling opposite directions */
+.film-strip-outer{overflow:hidden;padding:0}
+
+.film-strip-row{display:flex;gap:0;padding:6px 0;position:relative}
+/* Sprocket holes top & bottom */
+.film-strip-row::before,.film-strip-row::after{
+  content:'';display:block;height:100%;width:28px;
+  background:repeating-linear-gradient(to bottom, transparent 0px, transparent 14px, var(--dark) 14px, var(--dark) 18px, transparent 18px, transparent 32px);
+  position:absolute;top:0;z-index:2;flex-shrink:0;
+}
+.film-strip-row::before{left:0}
+.film-strip-row::after{right:0}
+
+.film-strip-inner{
+  display:flex;gap:4px;
+  animation:reelScroll 30s linear infinite;
+  padding:0 32px;
+}
+.film-strip-inner.reverse{animation-direction:reverse;animation-duration:36s}
+.film-strip-inner:hover{animation-play-state:paused}
+@keyframes reelScroll{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+
+.reel-frame{
+
+  flex-shrink:0;width:220px;height:150px;overflow:hidden;
+  border:3px solid #2a2724;
+  position:relative;cursor:pointer;
+  transition:border-color .3s;
+}
+.reel-frame:hover{border-color:var(--crimson)}
+.reel-frame img{width:100%;height:100%;object-fit:cover;filter:sepia(15%) contrast(1.05);transition:transform .6s,filter .4s}
+.reel-frame:hover img{transform:scale(1.08);filter:sepia(0%) contrast(1.1)}
+
+/* sprocket holes drawn via pseudo on each frame */
+.reel-frame::before{
+  content:'';position:absolute;top:0;left:0;right:0;height:12px;z-index:3;
+  background:repeating-linear-gradient(to right, transparent 0, transparent 18px, rgba(0,0,0,.7) 18px, rgba(0,0,0,.7) 22px, transparent 22px, transparent 36px);
+}
+.reel-frame::after{
+  content:'';position:absolute;bottom:0;left:0;right:0;height:12px;z-index:3;
+  background:repeating-linear-gradient(to right, transparent 0, transparent 18px, rgba(0,0,0,.7) 18px, rgba(0,0,0,.7) 22px, transparent 22px, transparent 36px);
+}
+.reel-frame-label{
+  position:absolute;bottom:12px;left:0;right:0;
+  font-family:'Cormorant Garamond',serif;font-size:.85rem;text-align:center;
+  color:rgba(255,255,255,.9);text-shadow:0 1px 3px rgba(0,0,0,.8);z-index:4;
+  opacity:0;transition:opacity .3s;
+}
+.reel-frame:hover .reel-frame-label{opacity:1}
+/* FIX 1: Reserve space before images load — prevents reflow jank */
+.reel-frame img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: sepia(15%) contrast(1.05);
+  transition: transform .6s, filter .4s;
+  /* Reserve the frame height even before image loads */
+  display: block;
+  background: #1a1714; /* matches your dark theme — placeholder color */
+}
+
+/* FIX 2: Pause animation on page load, re-enable after images are ready */
+.film-strip-inner {
+  display: flex;
+  gap: 4px;
+  animation: reelScroll 30s linear infinite;
+  padding: 0 32px;
+  /* Start paused — JS will unpause */
+  animation-play-state: paused;
+  /* GPU compositing — prevents layout repaints during scroll */
+  will-change: transform;
+  transform: translateZ(0);
+}
+.film-strip-inner.reverse {
+  animation-direction: reverse;
+  animation-duration: 36s;
+}
+.film-strip-inner:hover {
+  animation-play-state: paused;
+}
+
+/* FIX 3: Prevent the section from causing layout shift during load */
+.reel-section {
+  background: var(--dark);
+  padding: 0;
+  overflow: hidden;
+  position: relative;
+  /* Contain layout so images loading inside don't affect outside layout */
+  contain: layout;
+}
+
+/* Add this — makes the section visually stable during image load */
+.film-strip-row {
+  display: flex;
+  gap: 0;
+  padding: 6px 0;
+  position: relative;
+  min-height: 162px; /* 150px frame height + 6px padding top + 6px bottom */
+}
+/* ════════════════════════════════
+   2. SCROLL-THROUGH FULLSCREEN PHOTOS + BG COLOR CHANGE
+════════════════════════════════ */
+.color-journey{position:relative}
+
+.color-slide{
+  min-height:100vh;
+  display:flex;align-items:center;
+  position:relative;overflow:hidden;
+  transition:background-color 0.6s ease;
+}
+/* backgrounds cycle ivory → blush → slate → sage → parchment */
+.color-slide:nth-child(1){background:#f8f5ef}
+.color-slide:nth-child(2){background:#f5ede8}
+.color-slide:nth-child(3){background:#e8ecf0}
+.color-slide:nth-child(4){background:#eaf0e8}
+.color-slide:nth-child(5){background:#f0ebe0}
+
+.color-slide .slide-inner{
+  display:grid;grid-template-columns:1fr 1fr;
+  width:100%;height:100%;min-height:100vh;
+}
+.color-slide:nth-child(even) .slide-photo-col{order:2}
+.color-slide:nth-child(even) .slide-text-col{order:1}
+
+/* FULLSCREEN ZOOM photo column – expands as you scroll into it */
+.slide-photo-col{
+  position:relative;overflow:hidden;
+}
+.slide-photo-col img{
+  width:100%;height:100%;min-height:100vh;
+  object-fit:contain;
+  transform:scale(1.12);
+  transition:transform 1.4s cubic-bezier(.22,1,.36,1);
+}
+.color-slide.in-view .slide-photo-col img{
+  transform:scale(1);
+}
+
+.slide-text-col{
+  display:flex;flex-direction:column;justify-content:center;
+  padding:80px 72px;
+}
+.slide-num{font-size:.55rem;letter-spacing:.38em;text-transform:uppercase;color:var(--crimson);margin-bottom:16px}
+.slide-title{font-family:'Cormorant Garamond',serif;font-size:clamp(2rem,3.5vw,3rem);font-weight:300;line-height:1.1;color:var(--dark);margin-bottom:10px}
+.slide-location{font-size:.6rem;letter-spacing:.2em;text-transform:uppercase;color:var(--warm-grey);margin-bottom:22px}
+.slide-desc{font-size:.76rem;line-height:1.9;color:var(--warm-grey);margin-bottom:32px;max-width:380px}
+.slide-link{font-size:.6rem;letter-spacing:.25em;text-transform:uppercase;color:var(--crimson);text-decoration:none;display:inline-flex;align-items:center;gap:10px;transition:gap .25s}
+.slide-link:hover{gap:18px}
+.slide-link::after{content:'→'}
+
+/* ════════════════════════════════
+   3. STATS BAR
+════════════════════════════════ */
+.stats-bar{display:grid;grid-template-columns:repeat(4,1fr);background:var(--dark)}
+.stat-item{padding:56px 32px;border-right:1px solid rgba(255,255,255,.06);text-align:center}
+.stat-item:last-child{border-right:none}
+.stat-num{font-family:'Cormorant Garamond',serif;font-size:clamp(2.5rem,4vw,4rem);font-weight:300;color:var(--crimson);display:block;margin-bottom:8px}
+.stat-label{font-size:.58rem;letter-spacing:.25em;text-transform:uppercase;color:rgba(255,255,255,.38)}
+
+/* ════════════════════════════════
+   TRAILERS SECTION
+════════════════════════════════ */
+.section{padding:100px 64px}
+.section-label{font-size:.58rem;letter-spacing:.38em;text-transform:uppercase;color:var(--crimson);margin-bottom:12px}
+.section-title{font-family:'Cormorant Garamond',serif;font-size:clamp(2.2rem,4.5vw,3.8rem);font-weight:300;line-height:1.08;color:var(--dark);margin-bottom:60px}
+.section-title em{font-style:italic;color:var(--warm-grey)}
+
+.services-section{background:var(--ivory);padding:100px 64px}
+.services-section .section-label{margin-bottom:18px}
+.services-section .section-title{margin-bottom:48px}
+.services-grid{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:24px}
+.service-card{overflow:hidden;border-radius:28px;box-shadow:0 24px 60px rgba(0,0,0,.08);background:#fff;transition:transform .3s}
+.service-card:hover{transform:translateY(-6px)}
+.service-card img{width:100%;aspect-ratio:4/3;object-fit:cover;display:block}
+.service-card-title{padding:18px 16px 24px;font-size:1rem;font-weight:500;color:var(--dark);text-align:center;line-height:1.4}
+@media(max-width:1200px){.services-grid{grid-template-columns:repeat(4,minmax(0,1fr))}}
+@media(max-width:900px){.services-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:18px}}
+@media(max-width:640px){.services-section{padding:80px 24px}}
+
+.trailer-tabs{display:flex;gap:0;margin-bottom:44px;border-bottom:1px solid var(--border)}
+.tab-btn{font-size:.6rem;letter-spacing:.2em;text-transform:uppercase;color:var(--warm-grey);background:none;border:none;cursor:pointer;padding:12px 22px;border-bottom:2px solid transparent;margin-bottom:-1px;transition:color .2s,border-color .2s}
+.tab-btn.active{color:var(--dark);border-color:var(--crimson)}
+.tab-btn:hover{color:var(--dark)}
+
+.trailers-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:4px}
+.trailer-card{position:relative;overflow:hidden;aspect-ratio:4/3;cursor:pointer}
+.trailer-card img,.trailer-card video{width:100%;height:100%;object-fit:cover;transition:transform .8s cubic-bezier(.22,1,.36,1);filter:grayscale(10%)}
+.trailer-card:hover img,.trailer-card:hover video{transform:scale(1.07);filter:grayscale(0%)}
+.trailer-overlay{position:absolute;inset:0;background:linear-gradient(to top,rgba(26,23,20,.85) 0%,transparent 55%);padding:20px;display:flex;flex-direction:column;justify-content:flex-end}
+.t-date{font-size:.52rem;letter-spacing:.28em;text-transform:uppercase;color:var(--crimson);margin-bottom:2px}
+.t-location{font-size:.52rem;letter-spacing:.2em;text-transform:uppercase;color:rgba(255,255,255,.5);margin-bottom:4px}
+.t-name{font-family:'Cormorant Garamond',serif;font-size:1.3rem;font-weight:300;color:#fff}
+.t-play{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%) scale(.7);width:52px;height:52px;border:1.5px solid rgba(255,255,255,.8);border-radius:50%;display:flex;align-items:center;justify-content:center;opacity:0;transition:opacity .3s,transform .3s}
+.t-play svg{width:15px;fill:#fff;margin-left:3px}
+.trailer-card:hover .t-play{opacity:1;transform:translate(-50%,-50%) scale(1)}
+.view-more-wrap{text-align:center;margin-top:52px}
+.view-more-btn{display:inline-block;padding:14px 50px;border:1.5px solid var(--crimson);color:var(--crimson);font-size:.62rem;letter-spacing:.25em;text-transform:uppercase;text-decoration:none;transition:all .25s}
+.view-more-btn:hover{background:var(--crimson);color:#fff}
+
+/* ════════════════════════════════
+   4. VINTAGE MUSIC PLAYER
+════════════════════════════════ */
+.music-section{background:var(--dark);padding:100px 64px;position:relative;overflow:hidden}
+/* subtle grain */
+.music-section::before{
+  content:'';position:absolute;inset:0;
+  background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+  pointer-events:none;opacity:.5;
+}
+.music-grid{display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:start;position:relative;z-index:1}
+.music-story .section-label{color:var(--crimson)}
+.music-story .section-title{color:#fff;margin-bottom:20px}
+.music-story .section-title em{color:rgba(255,255,255,.3)}
+.music-story-text{font-size:.76rem;line-height:1.95;color:rgba(255,255,255,.45);margin-bottom:28px}
+.music-story-quote{font-family:'Cormorant Garamond',serif;font-size:1.6rem;font-weight:300;font-style:italic;color:rgba(255,255,255,.7);line-height:1.35;border-left:2px solid var(--crimson);padding-left:20px;margin-bottom:32px}
+
+/* ── VINTAGE PLAYER ── */
+.vinyl-player{
+  background:linear-gradient(145deg,#1c1814,#111009);
+  border:1px solid rgba(255,255,255,.08);
+  border-radius:4px;
+  padding:36px;
+  box-shadow:0 24px 80px rgba(0,0,0,.5), inset 0 1px 0 rgba(255,255,255,.06);
+  position:relative;
+}
+/* wood-grain top bar */
+.player-wood{
+  height:14px;margin:-36px -36px 28px;
+  background:repeating-linear-gradient(90deg,#3d2a12,#4a3318 2px,#3a2610 2px,#4a3318 6px);
+  border-radius:4px 4px 0 0;
+}
+
+/* spinning record */
+.record-wrap{position:relative;width:160px;height:160px;margin:0 auto 28px;flex-shrink:0}
+.record{
+  width:160px;height:160px;border-radius:50%;
+  background:conic-gradient(#111 0deg, #1a1a1a 10deg, #0d0d0d 20deg, #181818 30deg, #111 40deg, #1a1a1a 50deg, #0d0d0d 60deg, #181818 70deg, #111 80deg, #1a1a1a 90deg, #0d0d0d 100deg, #181818 110deg, #111 120deg, #1a1a1a 130deg, #0d0d0d 140deg, #181818 150deg, #111 160deg, #1a1a1a 170deg, #0d0d0d 180deg, #181818 190deg, #111 200deg, #1a1a1a 210deg, #0d0d0d 220deg, #181818 230deg, #111 240deg, #1a1a1a 250deg, #0d0d0d 260deg, #181818 270deg, #111 280deg, #1a1a1a 290deg, #0d0d0d 300deg, #181818 310deg, #111 320deg, #1a1a1a 330deg, #0d0d0d 340deg, #181818 350deg);
+  animation:spin 4s linear infinite;
+  animation-play-state:paused;
+  position:relative;
+  box-shadow:0 0 0 2px #222, 0 0 0 4px #1a1a1a, 0 8px 24px rgba(0,0,0,.6);
+}
+.record.playing{animation-play-state:running}
+@keyframes spin{from{transform:rotate(0deg)}to{transform:rotate(360deg)}}
+/* grooves */
+.record::before{
+  content:'';position:absolute;inset:0;border-radius:50%;
+  background:repeating-radial-gradient(circle, transparent 0, transparent 6px, rgba(255,255,255,.02) 6px, rgba(255,255,255,.02) 7px);
+}
+/* label */
+.record::after{
+  content:'TWF';position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);
+  width:44px;height:44px;border-radius:50%;
+  background:radial-gradient(circle,var(--crimson) 0%,#7a1515 100%);
+  font-family:'Montserrat',sans-serif;font-size:.45rem;letter-spacing:.18em;
+  color:rgba(255,255,255,.8);display:flex;align-items:center;justify-content:center;
+}
+/* tonearm */
+.tonearm{
+  position:absolute;top:8px;right:-8px;
+  width:70px;height:4px;
+  background:linear-gradient(to right,#888,#555);
+  transform-origin:right center;
+  transform:rotate(-30deg);
+  border-radius:2px;
+  transition:transform 1s ease;
+  z-index:2;
+}
+.tonearm::after{content:'';position:absolute;left:-4px;top:-5px;width:8px;height:14px;background:linear-gradient(#777,#444);border-radius:1px}
+.record.playing ~ .tonearm{transform:rotate(-15deg)}
+
+/* track list */
+.track-list{display:flex;flex-direction:column;gap:2px;margin-top:4px}
+.v-track{
+  display:flex;align-items:center;gap:14px;
+  padding:14px 18px;
+  background:rgba(255,255,255,.03);
+  border:1px solid rgba(255,255,255,.05);
+  cursor:pointer;transition:background .2s,border-color .2s;
+  position:relative;overflow:hidden;
+}
+.v-track::before{content:'';position:absolute;left:0;top:0;width:0;height:100%;background:rgba(155,28,28,.15);transition:width .4s}
+.v-track:hover::before{width:100%}
+.v-track.active{border-color:rgba(155,28,28,.4);background:rgba(155,28,28,.08)}
+.track-num{font-family:'Special Elite',serif;font-size:.75rem;color:rgba(255,255,255,.3);width:18px;flex-shrink:0}
+.v-track.active .track-num{color:var(--crimson)}
+.track-cover{width:44px;height:44px;object-fit:cover;filter:grayscale(25%);flex-shrink:0}
+.track-info-col{flex:1}
+.track-title-v{font-family:'Cormorant Garamond',serif;font-size:1rem;color:rgba(255,255,255,.85);margin-bottom:2px}
+.track-artist-v{font-size:.55rem;letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,.38)}
+.track-dur{font-size:.6rem;color:rgba(255,255,255,.3);flex-shrink:0}
+
+/* player controls */
+.player-controls{
+  display:flex;align-items:center;justify-content:space-between;
+  margin-top:22px;padding-top:22px;
+  border-top:1px solid rgba(255,255,255,.06);
+}
+.player-now{flex:1}
+.player-now .now-title{font-family:'Cormorant Garamond',serif;font-size:1.1rem;color:rgba(255,255,255,.85)}
+.player-now .now-artist{font-size:.55rem;letter-spacing:.15em;text-transform:uppercase;color:rgba(255,255,255,.35)}
+.ctrl-btns{display:flex;align-items:center;gap:14px}
+.ctrl-btn{
+  width:36px;height:36px;border:1px solid rgba(255,255,255,.15);border-radius:50%;
+  display:flex;align-items:center;justify-content:center;cursor:pointer;
+  background:none;color:rgba(255,255,255,.6);font-size:.9rem;
+  transition:all .25s;
+}
+.ctrl-btn:hover{border-color:var(--crimson);color:var(--crimson)}
+.ctrl-btn.play-main{
+  width:48px;height:48px;border-color:var(--crimson);color:var(--crimson);
+  background:rgba(155,28,28,.12);font-size:1rem;
+}
+.ctrl-btn.play-main:hover{background:var(--crimson);color:#fff}
+.ctrl-btn.play-main svg{width:14px;fill:currentColor;margin-left:2px}
+.ctrl-btn svg{width:12px;fill:currentColor}
+
+/* progress bar */
+.progress-wrap{
+  margin-top:18px;
+  display:flex;align-items:center;gap:12px;
+}
+.prog-time{font-size:.58rem;color:rgba(255,255,255,.35);font-variant-numeric:tabular-nums;min-width:32px}
+.prog-bar{flex:1;height:3px;background:rgba(255,255,255,.1);border-radius:2px;cursor:pointer;position:relative}
+.prog-fill{height:100%;background:var(--crimson);border-radius:2px;width:0%;transition:width .5s linear}
+.prog-bar::after{content:'';position:absolute;top:50%;right:0;transform:translate(50%,-50%);width:10px;height:10px;background:var(--crimson);border-radius:50%;opacity:0;transition:opacity .2s}
+.prog-bar:hover::after{opacity:1}
+
+/* ── ABOUT / HORIZONTAL SCROLL ── */
+.about-section{background:var(--parchment);padding:100px 0 100px 64px;overflow:hidden}
+.about-inner{display:grid;grid-template-columns:360px 1fr;align-items:start}
+.about-text{padding-right:56px;position:sticky;top:120px}
+.about-text .section-title{margin-bottom:18px}
+.about-text p{font-size:.75rem;line-height:1.9;color:var(--warm-grey);margin-bottom:22px}
+.about-text .signature{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:1.45rem;color:var(--dark);display:block;margin-top:8px}
+.drag-hint{display:flex;align-items:center;gap:10px;margin-top:22px;font-size:.58rem;letter-spacing:.18em;text-transform:uppercase;color:var(--warm-grey)}
+.drag-hint-arrow{font-size:1.2rem;animation:nudge 1.5s ease-in-out infinite;display:inline-block}
+@keyframes nudge{0%,100%{transform:translateX(0)}50%{transform:translateX(10px)}}
+
+.h-scroll-track{display:flex;gap:4px;overflow-x:auto;padding-right:64px;scroll-snap-type:x mandatory;scrollbar-width:thin;scrollbar-color:var(--crimson) var(--cream);cursor:grab}
+.h-scroll-track:active{cursor:grabbing}
+.h-scroll-track::-webkit-scrollbar{height:3px}
+.h-scroll-track::-webkit-scrollbar-thumb{background:var(--crimson)}
+.h-card{flex-shrink:0;width:300px;aspect-ratio:3/4;scroll-snap-align:start;position:relative;overflow:hidden}
+.h-card img{width:100%;height:100%;object-fit:cover;filter:grayscale(15%);transition:transform .8s,filter .4s}
+.h-card:hover img{transform:scale(1.07);filter:grayscale(0%)}
+.h-card-info{position:absolute;inset:0;padding:18px;background:linear-gradient(transparent 50%,rgba(26,23,20,.75));display:flex;flex-direction:column;justify-content:flex-end}
+.h-card-info .c-loc{font-size:.52rem;letter-spacing:.2em;text-transform:uppercase;color:var(--crimson);margin-bottom:3px}
+.h-card-info .c-name{font-family:'Cormorant Garamond',serif;font-size:1.15rem;font-weight:300;color:#fff}
+
+/* ── QUOTE ── */
+.quote-section{padding:120px 64px;text-align:center;background:var(--parchment);border-top:1px solid var(--border);border-bottom:1px solid var(--border);position:relative;overflow:hidden}
+.quote-bg{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);font-family:'Cormorant Garamond',serif;font-size:clamp(8rem,18vw,18rem);font-weight:300;color:rgba(26,23,20,.04);white-space:nowrap;pointer-events:none;user-select:none}
+.quote-mark{font-family:'Cormorant Garamond',serif;font-size:6rem;color:var(--crimson);line-height:.7;display:block;margin-bottom:10px;opacity:.2}
+.quote-text{font-family:'Cormorant Garamond',serif;font-size:clamp(1.6rem,3.5vw,3rem);font-weight:300;font-style:italic;line-height:1.35;max-width:800px;margin:0 auto 26px;color:var(--dark);position:relative}
+.quote-attr{font-size:.58rem;letter-spacing:.32em;text-transform:uppercase;color:var(--crimson)}
+
+/* ── PRESS ── */
+.press-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:4px;margin-top:56px}
+.press-card{padding:50px 40px;background:var(--parchment);border:1px solid var(--border);position:relative;overflow:hidden;transition:box-shadow .3s}
+.press-card::after{content:'';position:absolute;bottom:0;left:0;width:0;height:2px;background:var(--crimson);transition:width .5s}
+.press-card:hover{box-shadow:0 12px 48px rgba(0,0,0,.06)}
+.press-card:hover::after{width:100%}
+.press-badge{font-size:.53rem;letter-spacing:.3em;text-transform:uppercase;color:var(--crimson);margin-bottom:10px;display:block}
+.press-year{font-size:.58rem;color:var(--warm-grey);margin-bottom:20px}
+.press-card h3{font-family:'Cormorant Garamond',serif;font-size:1.5rem;font-weight:300;line-height:1.28;color:var(--dark)}
+
+/* ── CREW SCROLL ── */
+.crew-section{padding:100px 0 100px 64px;background:var(--cream);overflow:hidden}
+.crew-scroll-outer{display:flex;gap:4px;overflow-x:auto;scroll-snap-type:x mandatory;scrollbar-width:none;padding-right:64px;cursor:grab}
+.crew-scroll-outer:active{cursor:grabbing}
+.crew-scroll-outer::-webkit-scrollbar{display:none}
+.crew-img-wrap{flex-shrink:0;width:250px;height:370px;overflow:hidden;scroll-snap-align:start}
+.crew-img-wrap img,.crew-img-wrap video{width:100%;height:100%;object-fit:cover;filter:grayscale(18%);transition:transform .8s,filter .5s}
+.crew-img-wrap:hover img,.crew-img-wrap:hover video{transform:scale(1.06);filter:grayscale(0%)}
+
+/* ── TESTIMONIALS ── */
+.testi-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:4px;margin-top:56px}
+.testi-card{padding:50px 44px;background:var(--ivory);border:1px solid var(--border);transition:transform .35s,box-shadow .35s}
+.testi-card:hover{transform:translateY(-6px);box-shadow:0 20px 60px rgba(0,0,0,.07)}
+.testi-star{color:var(--crimson);font-size:.75rem;margin-bottom:18px;letter-spacing:3px}
+.testi-quote{font-family:'Cormorant Garamond',serif;font-size:1.18rem;font-style:italic;line-height:1.75;color:var(--dark);margin-bottom:26px}
+.testi-name{font-size:.58rem;letter-spacing:.22em;text-transform:uppercase;color:var(--crimson);margin-bottom:3px}
+.testi-role{font-size:.53rem;letter-spacing:.15em;text-transform:uppercase;color:var(--warm-grey)}
+
+/* ── CONTACT ── */
+.contact-section{padding:120px 64px;background:var(--dark);text-align:center}
+.contact-section .section-label{color:var(--crimson)}
+.contact-section h2{font-family:'Cormorant Garamond',serif;font-size:clamp(2.5rem,6vw,5rem);font-weight:300;color:#fff;margin-bottom:12px;line-height:1.05}
+.contact-section h2 em{font-style:italic;color:var(--crimson)}
+.contact-section>p{font-size:.66rem;color:rgba(255,255,255,.4);letter-spacing:.15em;text-transform:uppercase;margin-bottom:48px}
+.enquire-form{max-width:560px;margin:0 auto}
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:8px}
+.form-field{width:100%;padding:16px 20px;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);color:#fff;font-family:'Montserrat',sans-serif;font-size:.72rem;letter-spacing:.04em;outline:none;transition:border-color .25s}
+.form-field:focus{border-color:var(--crimson)}
+.form-field::placeholder{color:rgba(255,255,255,.28)}
+.form-field.full{grid-column:span 2}
+textarea.form-field{resize:none;height:100px}
+.form-submit{width:100%;padding:16px;background:var(--crimson);color:#fff;border:none;font-family:'Montserrat',sans-serif;font-size:.62rem;letter-spacing:.25em;text-transform:uppercase;cursor:pointer;transition:background .25s,transform .2s}
+.form-submit:hover{background:var(--crimson2);transform:translateY(-2px)}
+.form-success{display:none;font-size:.75rem;color:var(--crimson);padding:20px;border:1px solid rgba(155,28,28,.3);margin-top:14px}
+
+/* ── FOOTER ── */
+footer{background:var(--dark);border-top:1px solid rgba(255,255,255,.06);padding:64px}
+.footer-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:40px;margin-bottom:52px}
+.footer-logo{font-family:'Cormorant Garamond',serif;font-size:1.2rem;letter-spacing:.14em;text-transform:uppercase;color:#fff;margin-bottom:10px}
+.footer-logo span{color:var(--crimson)}
+.footer-tagline{font-size:.56rem;letter-spacing:.2em;text-transform:uppercase;color:rgba(255,255,255,.28);margin-bottom:20px}
+.footer-desc{font-size:.68rem;color:rgba(255,255,255,.32);line-height:1.8}
+.f-col-title{font-size:.56rem;letter-spacing:.28em;text-transform:uppercase;color:var(--crimson);margin-bottom:18px}
+.f-links{list-style:none;display:flex;flex-direction:column;gap:11px}
+.f-links a{font-size:.62rem;letter-spacing:.1em;color:rgba(255,255,255,.4);text-decoration:none;transition:color .2s}
+.f-links a:hover{color:#fff}
+.f-social{display:flex;gap:16px;margin-bottom:20px}
+.f-social a{font-size:.56rem;letter-spacing:.2em;text-transform:uppercase;color:rgba(255,255,255,.38);text-decoration:none;transition:color .2s}
+.f-social a:hover{color:var(--crimson)}
+.footer-bottom{border-top:1px solid rgba(255,255,255,.05);padding-top:22px;display:flex;justify-content:space-between}
+.footer-bottom p{font-size:.53rem;letter-spacing:.14em;color:rgba(255,255,255,.2)}
+
+/* ── MODAL ── */
+.modal-overlay{display:none;position:fixed;inset:0;z-index:999;background:rgba(8,6,4,.95);align-items:center;justify-content:center}
+.modal-overlay.open{display:flex;animation:modalIn .3s ease}
+@keyframes modalIn{from{opacity:0}to{opacity:1}}
+.modal-close{position:absolute;top:26px;right:34px;font-size:2.2rem;cursor:pointer;color:rgba(255,255,255,.5);line-height:1;transition:color .2s}
+.modal-close:hover{color:#fff}
+.modal-video-wrap{width:82vw;max-width:1080px;aspect-ratio:16/9}
+.modal-video-wrap iframe,.modal-video-wrap video{width:100%;height:100%;border:none;background:#000}
+
+@media only screen and (min-width: 768px){
+  .hero-tag {
+  width: 72%;
+  }
+}
+
+/* ── RESPONSIVE ── */
+@media(max-width:960px){
+  nav{padding:16px 22px}
+  .nav-links{display:none}
+  .hamburger{display:flex}
+  nav.menu-open .nav-links{display:flex;flex-direction:column;position:fixed;inset:0;background:var(--ivory);align-items:center;justify-content:center;gap:26px;z-index:298}
+  nav.menu-open .nav-links a{font-size:1.1rem}  .hero-content{padding:60px 26px 80px}
+  .section{padding:70px 26px}
+  .color-slide .slide-inner{grid-template-columns:1fr}
+  .color-slide:nth-child(even) .slide-photo-col,.color-slide:nth-child(even) .slide-text-col{order:unset}
+  .slide-photo-col{height:55vw;min-height:240px}
+  .slide-photo-col img{min-height:0}
+  .slide-text-col{padding:44px 26px}
+  .stats-bar{grid-template-columns:repeat(2,1fr)}
+  .trailers-grid{grid-template-columns:repeat(2,1fr)}
+  .music-grid{grid-template-columns:1fr;gap:44px}
+  .about-inner{grid-template-columns:1fr}
+  .about-text{position:static;padding-right:0;margin-bottom:36px}
+  .press-grid{grid-template-columns:1fr}
+  .testi-grid{grid-template-columns:1fr}
+  .footer-grid{grid-template-columns:1fr}
+  .footer-bottom{flex-direction:column;gap:8px;text-align:center}
+  .form-row{grid-template-columns:1fr}
+  .form-field.full{grid-column:span 1}
+  .about-section{padding:70px 0 70px 26px}
+  .crew-section{padding:70px 0 70px 26px}
+  .nav-cta{
+    display: none;
+
+  }
+.trailer-tabs{
+  overflow: scroll;
+}
+.hero-sub{
+  color: black;
+}
+.hero-title em{
+  color: #000000;;
+}
+.hero-title{
+  color: white;
+  font-size: 24px;
+}
+.hero-tag{
+  color: white;
+          background: #9b1c1c;
+        font-size: 8px;
+        padding: 2px;
+        margin-bottom: 1px;
+}
+.btn-primary{
+  padding: 14px 21px;
+}
+.music-section{padding:100px 5px;}
+.vinyl-player{
+  padding: 5px;
+}
+}
+/* DEFAULT DESKTOP */
+.nav-links {
+  display: flex;
+  gap: 30px;
+  list-style: none;
+}
+
+/* HIDE hamburger on desktop */
+.hamburger {
+  display: none;
+}
+
+/* MOBILE */
+@media (max-width: 768px) {
+
+  .hamburger {
+    display: block;
+    cursor: pointer;
+  }
+
+  .nav-links {
+    position: fixed;
+    top: 0;
+    right: -100%;
+    width: 100%;
+    height: 100vh;
+    background: #000;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 25px;
+    transition: 0.3s ease;
+    z-index: 999;
+  }
+
+  .nav-links.active {
+    right: 0;
+  }
+
+  .nav-links li a {
+    color: #fff;
+    font-size: 22px;
+  }
+
+  .close-btn {
+    position: absolute;
+    top: 20px;
+    right: 25px;
+    font-size: 28px;
+    color: #fff;
+    cursor: pointer;
+  }
+
+  .nav-cta {
+    display: none; /* optional */
+  }
+}
+.hamburger span{
+ background: black;
+}
+
+
+   #mainNav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 1000;
+      height: var(--nav-h);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 48px;
+      transition: background var(--transition), box-shadow var(--transition), height var(--transition);
+    }
+
+    #mainNav.scrolled {
+      background: rgba(248,245,239,.96);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      box-shadow: 0 1px 0 rgba(200, 169, 110, 0.12);
+      height: 64px;
+    }
+
+    /* ── LOGO ── */
+    .nav-logo {
+      display: flex;
+      align-items: center;
+      text-decoration: none;
+      flex-shrink: 0;
+      z-index: 1001;
+    }
+
+    .nav-logo img {
+      height: 61px;
+      width: auto;
+      object-fit: contain;
+      transition: opacity var(--transition);
+      filter: brightness(1);
+    }
+
+    .nav-logo:hover img { opacity: 0.8; }
+
+    #mainNav.scrolled .nav-logo img { height: 61px; }
+
+    /* ── DESKTOP LINKS ── */
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 36px;
+      list-style: none;
+      position: absolute;
+      left: 50%;
+      transform: translateX(-50%);
+    }
+
+    .nav-links a {
+      text-decoration: none;
+      font-family: 'Montserrat', sans-serif;
+    
+    }
+
+    .nav-links a::after {
+      content: '';
+      position: absolute;
+      bottom: 0; left: 0;
+      width: 0; height: 1px;
+      background: var(--gold);
+      transition: width var(--transition);
+    }
+
+    .nav-links a:hover {
+      color: var(--text);
+    }
+
+    .nav-links a:hover::after { width: 100%; }
+
+    /* ── CTA BUTTON ── */
+    .nav-cta {
+      text-decoration: none;
+      font-family: 'Montserrat', sans-serif;
+      font-size: 10px;
+      font-weight: 500;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--gold);
+      border: 1px solid rgba(200, 169, 110, 0.45);
+      padding: 9px 22px;
+      position: relative;
+      overflow: hidden;
+      transition: color var(--transition), border-color var(--transition);
+      flex-shrink: 0;
+    }
+
+    .nav-cta::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: var(--gold);
+      transform: translateX(-101%);
+      transition: transform var(--transition);
+    }
+
+    .nav-cta:hover::before { transform: translateX(0); }
+    .nav-cta:hover { color: #0a0a0a; border-color: var(--gold); }
+
+    .nav-cta span { position: relative; z-index: 1; }
+
+    /* ── HAMBURGER ── */
+    .hamburger {
+      display: none;
+      flex-direction: column;
+      justify-content: center;
+      align-items: flex-end;
+      gap: 5px;
+      width: 32px;
+      height: 32px;
+      cursor: pointer;
+      z-index: 1001;
+      background: none;
+      border: none;
+      padding: 0;
+    }
+
+    .hamburger span {
+      display: block;
+      height: 1px;
+      transition: all var(--transition);
+      transform-origin: right center;
+    }
+
+    .hamburger span:nth-child(1) { width: 24px; }
+    .hamburger span:nth-child(2) { width: 16px; }
+    .hamburger span:nth-child(3) { width: 20px; }
+
+    .hamburger.open span:nth-child(1) {
+      width: 22px;
+      transform: rotate(-45deg) translateY(0px);
+    }
+    .hamburger.open span:nth-child(2) {
+      opacity: 0;
+      transform: translateX(8px);
+    }
+    .hamburger.open span:nth-child(3) {
+      width: 22px;
+      transform: rotate(45deg) translateY(0px);
+    }
+
+    /* ── MOBILE OVERLAY ── */
+    .mobile-overlay {
+      display: none;
+      position: fixed;
+      inset: 0;
+      z-index: 999;
+      background: rgb(226 226 226 / 98%);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      gap: 0;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity var(--transition);
+    }
+
+    .mobile-overlay.open {
+      opacity: 1;
+      pointer-events: all;
+    }
+
+    .mobile-overlay::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, var(--gold), transparent);
+      opacity: 0.4;
+    }
+
+    .mobile-links {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0;
+      width: 100%;
+    }
+
+    .mobile-links li {
+      width: 100%;
+      text-align: center;
+      opacity: 0;
+      transform: translateY(16px);
+      transition: opacity 0.4s ease, transform 0.4s ease;
+    }
+
+    .mobile-overlay.open .mobile-links li {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .mobile-overlay.open .mobile-links li:nth-child(1) { transition-delay: 0.05s; }
+    .mobile-overlay.open .mobile-links li:nth-child(2) { transition-delay: 0.10s; }
+    .mobile-overlay.open .mobile-links li:nth-child(3) { transition-delay: 0.15s; }
+    .mobile-overlay.open .mobile-links li:nth-child(4) { transition-delay: 0.20s; }
+    .mobile-overlay.open .mobile-links li:nth-child(5) { transition-delay: 0.25s; }
+    .mobile-overlay.open .mobile-links li:nth-child(6) { transition-delay: 0.30s; }
+
+    .mobile-links a {
+      display: block;
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(28px, 7vw, 44px);
+      font-weight: 900;
+      font-style: italic;
+      letter-spacing: 0.04em;
+      color: var(--text);
+      text-decoration: none;
+      padding: 14px 0;
+      border-bottom: 1px solid rgba(255,255,255,0.05);
+      transition: color var(--transition);
+    }
+
+    .mobile-links a:hover { color: var(--gold); }
+
+    .mobile-cta {
+      margin-top: 40px;
+      opacity: 0;
+      transform: translateY(12px);
+      transition: opacity 0.4s ease 0.35s, transform 0.4s ease 0.35s;
+    }
+
+    .mobile-overlay.open .mobile-cta {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .mobile-cta a {
+      text-decoration: none;
+      font-family: 'Montserrat', sans-serif;
+      font-size: 10px;
+      font-weight: 500;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: var(--gold);
+      border: 1px solid rgba(200, 169, 110, 0.5);
+      padding: 14px 48px;
+      display: inline-block;
+      transition: background var(--transition), color var(--transition);
+    }
+
+    .mobile-cta a:hover {
+      background: var(--gold);
+      color: #0a0a0a;
+    }
+
+    /* ── DECORATIVE CORNER LINES ── */
+    .mobile-overlay::after {
+      content: '';
+      position: absolute;
+      bottom: 48px; left: 50%;
+      transform: translateX(-50%);
+      width: 1px;
+      height: 48px;
+      background: linear-gradient(to bottom, var(--gold-dim), transparent);
+    }
+
+
+ 
+.reel-frame img {
+  /* add these two lines to your existing rule */
+  background: #1a1714;
+  display: block;
+}
+    /* ── RESPONSIVE ── */
+    @media (max-width: 900px) {
+      .nav-links,
+      .nav-cta { display: none; }
+      .hamburger { display: flex; }
+      .mobile-overlay { display: flex; }
+      #mainNav { padding: 0 24px; height: var(--nav-h-mobile); }
+  .service-card-title{
+    font-size: 12px;
+    padding: 5px;
+  }
+    }
+
+    @media (max-width: 1100px) and (min-width: 901px) {
+      #mainNav { padding: 0 32px; }
+      .nav-links { gap: 24px; }
+    }
+</style>
+</head>
+<body>
+
+<!-- ─── NAV ─── -->
+<nav id="mainNav">
+  <a href="#" class="nav-logo">
+    <img src="https://cdn.shopify.com/s/files/1/0639/3515/2267/files/Jonna_Films_Logo.png?v=1774433675" alt="Jonna Films" />
+  </a>
+
+  <ul class="nav-links" id="navLinks">
+    <li><a href="#films">Films</a></li>
+    <li><a href="#trailers">Portfolio</a></li>
+    <li><a href="#about">About</a></li>
+    <li><a href="#services">Services</a></li>
+    <li><a href="#press">Press</a></li>
+    <li><a href="#enquire">Contact</a></li>
+  </ul>
+
+  <a href="#enquire" class="nav-cta"><span>Enquire</span></a>
+
+  <button class="hamburger" id="hamburger" aria-label="Toggle menu" onclick="toggleMenu()">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<!-- MOBILE OVERLAY -->
+<div class="mobile-overlay" id="mobileOverlay">
+  <ul class="mobile-links">
+    <li><a href="#films"    onclick="closeMenu()">Films</a></li>
+    <li><a href="#trailers" onclick="closeMenu()">Portfolio</a></li>
+    <li><a href="#about"    onclick="closeMenu()">About</a></li>
+    <li><a href="#services" onclick="closeMenu()">Services</a></li>
+    <li><a href="#press"    onclick="closeMenu()">Press</a></li>
+    <li><a href="#enquire"  onclick="closeMenu()">Contact</a></li>
+  </ul>
+  <div class="mobile-cta">
+    <a href="#enquire" onclick="closeMenu()">Enquire Now</a>
+  </div>
+</div>
+
+
+
+<!-- ─── HERO ─── -->
+<section class="hero">
+  <picture>
+    <source media="(max-width: 768px)" srcset="https://cdn.shopify.com/s/files/1/0639/3515/2267/files/Gemini_Generated_Image_rbmk07rbmk07rbmk.png?v=1785927780">
+    <img class="hero-bg" src="https://cdn.shopify.com/s/files/1/0639/3515/2267/files/Landing_page_home_screen_1.jpg?v=1785927334" alt="Hero">
+  </picture>
+  <div class="hero-overlay"></div>
+  <div class="hero-content">
+    <span class="hero-tag">Real Films · Real Filmmakers · Since 2012</span>
+    <h1 class="hero-title">We don't shoot<br>weddings. We<br><em>tell stories.</em></h1>
+    <p class="hero-sub">Cinematic wedding films crafted with intention, emotion, and artistry — across India and the world.</p>
+    <div class="hero-btns">
+      <a href="#films" class="btn-primary">Watch Films</a>
+      <a href="#enquire" class="btn-ghost">Book Us</a>
+    </div>
+  </div>
+  <div class="scroll-hint"><div class="scroll-line"></div><span>Scroll</span></div>
+</section>
+
+<!-- ─── TICKER ─── -->
+<div class="ticker-wrap">
+  <div class="ticker-inner">
+    <span class="ticker-item">Lake Como <span class="ticker-dot">♥</span></span>
+    <span class="ticker-item">Tuscany <span class="ticker-dot">♥</span></span>
+    <span class="ticker-item">Bali <span class="ticker-dot">♥</span></span>
+    <span class="ticker-item">Udaipur <span class="ticker-dot">♥</span></span>
+    <span class="ticker-item">Istanbul <span class="ticker-dot">♥</span></span>
+    <span class="ticker-item">Mexico <span class="ticker-dot">♥</span></span>
+    <span class="ticker-item">Rajasthan <span class="ticker-dot">♥</span></span>
+    <span class="ticker-item">Marrakech <span class="ticker-dot">♥</span></span>
+    <span class="ticker-item">Vietnam <span class="ticker-dot">♥</span></span>
+    <span class="ticker-item">Paris <span class="ticker-dot">♥</span></span>
+    <span class="ticker-item">Goa <span class="ticker-dot">♥</span></span>
+    <span class="ticker-item">Lake Como <span class="ticker-dot">♥</span></span>
+    <span class="ticker-item">Tuscany <span class="ticker-dot">♥</span></span>
+    <span class="ticker-item">Bali <span class="ticker-dot">♥</span></span>
+    <span class="ticker-item">Udaipur <span class="ticker-dot">♥</span></span>
+    <span class="ticker-item">Istanbul <span class="ticker-dot">♥</span></span>
+    <span class="ticker-item">Mexico <span class="ticker-dot">♥</span></span>
+    <span class="ticker-item">Rajasthan <span class="ticker-dot">♥</span></span>
+    <span class="ticker-item">Marrakech <span class="ticker-dot">♥</span></span>
+    <span class="ticker-item">Vietnam <span class="ticker-dot">♥</span></span>
+    <span class="ticker-item">Paris <span class="ticker-dot">♥</span></span>
+    <span class="ticker-item">Goa <span class="ticker-dot">♥</span></span>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════
+  1. CAMERA FILM REEL SCROLLING
+═══════════════════════════════ -->
+<section class="reel-section" id="films">
+  <div class="reel-header reveal">
+    <div class="section-label">Our Films</div>
+    <h2>Stories on <em>Celluloid</em></h2>
+  </div>
+
+  <!-- Row 1 — left to right -->
+  <div class="film-strip-outer">
+    <div class="film-strip-row">
+      <div class="film-strip-inner" id="reel1">
+        <!-- onclick="openModal('https://player.vimeo.com/video/1115761410')" -->
+        <div class="reel-frame" ><img src="https://cdn.shopify.com/s/files/1/0822/4407/5755/files/Image1_scroll.jpg?v=1775973212" alt=""><div class="reel-frame-label">Arya & Federico</div></div>
+        <div class="reel-frame"><img src="https://cdn.shopify.com/s/files/1/0822/4407/5755/files/Image2_scroll.jpg?v=1775973212" alt=""><div class="reel-frame-label">Priya & Akshay</div></div>
+        <div class="reel-frame"><img src="https://cdn.shopify.com/s/files/1/0822/4407/5755/files/Couple_Image3.jpg?v=1775973573" alt=""><div class="reel-frame-label">Anushka & Virat</div></div>
+        <div class="reel-frame"><img src="https://cdn.shopify.com/s/files/1/0822/4407/5755/files/Couple_Image4.jpg?v=1775973575" alt=""><div class="reel-frame-label">Deepika & Ranveer</div></div>
+        <div class="reel-frame"><img src="https://cdn.shopify.com/s/files/1/0822/4407/5755/files/Image5_scroll.jpg?v=1775973212" alt=""><div class="reel-frame-label">Katrina & Vicky</div></div>
+        <div class="reel-frame"><img src="https://cdn.shopify.com/s/files/1/0822/4407/5755/files/Image6_scroll.jpg?v=1775971418" alt=""><div class="reel-frame-label">Shibani & Farhan</div></div>
+        <div class="reel-frame"><img src="https://cdn.shopify.com/s/files/1/0822/4407/5755/files/Image7_scroll.jpg?v=1775971422" alt=""><div class="reel-frame-label">Kiara & Sidharth</div></div>
+        <div class="reel-frame"><img src="https://cdn.shopify.com/s/files/1/0822/4407/5755/files/Image8_scroll.jpg?v=1775973212" alt=""><div class="reel-frame-label">Milan Sai & Suraj</div></div>
+        <!-- duplicate for seamless -->
+        <div class="reel-frame"><img src="https://cdn.shopify.com/s/files/1/0822/4407/5755/files/Image9_scroll.jpg?v=1775971418" alt=""><div class="reel-frame-label">Arya & Federico</div></div>
+        <div class="reel-frame"><img src="https://cdn.shopify.com/s/files/1/0822/4407/5755/files/Image10_scroll.jpg?v=1775973212" alt=""><div class="reel-frame-label">Priya & Akshay</div></div>
+        <div class="reel-frame"><img src="https://cdn.shopify.com/s/files/1/0822/4407/5755/files/Image11_scroll.jpg?v=1775973212" alt=""><div class="reel-frame-label">Anushka & Virat</div></div>
+        <div class="reel-frame"><img src="https://cdn.shopify.com/s/files/1/0822/4407/5755/files/Image12_scroll.jpg?v=1775971427" alt=""><div class="reel-frame-label">Deepika & Ranveer</div></div>
+        <div class="reel-frame"><img src="https://cdn.shopify.com/s/files/1/0822/4407/5755/files/Image13_scroll.jpg?v=1775973212" alt=""><div class="reel-frame-label">Katrina & Vicky</div></div>
+        <div class="reel-frame"><img src="https://cdn.shopify.com/s/files/1/0822/4407/5755/files/Image14_scroll.jpg?v=1775973212" alt=""><div class="reel-frame-label">Shibani & Farhan</div></div>
+        <div class="reel-frame"><img src="https://cdn.shopify.com/s/files/1/0822/4407/5755/files/Image15_scroll.jpg?v=1775973212" alt=""><div class="reel-frame-label">Kiara & Sidharth</div></div>
+        <div class="reel-frame"><img src="https://cdn.shopify.com/s/files/1/0822/4407/5755/files/Image16_scroll.jpg?v=1775973211" alt=""><div class="reel-frame-label">Milan Sai & Suraj</div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Row 2 — reverse direction -->
+  <div class="film-strip-outer" style="margin-top:6px">
+    <div class="film-strip-row">
+      <div class="film-strip-inner reverse">
+
+        <!-- Row 2 duplicates — FIXED -->
+
+   <div class="reel-frame" ><img src="https://cdn.shopify.com/s/files/1/0822/4407/5755/files/Image1_scroll.jpg?v=1775973212" alt=""><div class="reel-frame-label">Arya & Federico</div></div>
+        <div class="reel-frame"><img src="https://cdn.shopify.com/s/files/1/0822/4407/5755/files/Image2_scroll.jpg?v=1775973212" alt=""><div class="reel-frame-label">Priya & Akshay</div></div>
+        <div class="reel-frame"><img src="https://cdn.shopify.com/s/files/1/0822/4407/5755/files/Couple_Image3.jpg?v=1775973573" alt=""><div class="reel-frame-label">Anushka & Virat</div></div>
+        <div class="reel-frame"><img src="https://cdn.shopify.com/s/files/1/0822/4407/5755/files/Couple_Image4.jpg?v=1775973575" alt=""><div class="reel-frame-label">Deepika & Ranveer</div></div>
+        <div class="reel-frame"><img src="https://cdn.shopify.com/s/files/1/0822/4407/5755/files/Image5_scroll.jpg?v=1775973212" alt=""><div class="reel-frame-label">Katrina & Vicky</div></div>
+        <div class="reel-frame"><img src="https://cdn.shopify.com/s/files/1/0822/4407/5755/files/Image6_scroll.jpg?v=1775971418" alt=""><div class="reel-frame-label">Shibani & Farhan</div></div>
+        <div class="reel-frame"><img src="https://cdn.shopify.com/s/files/1/0822/4407/5755/files/Image7_scroll.jpg?v=1775971422" alt=""><div class="reel-frame-label">Kiara & Sidharth</div></div>
+        <div class="reel-frame"><img src="https://cdn.shopify.com/s/files/1/0822/4407/5755/files/Image8_scroll.jpg?v=1775973212" alt=""><div class="reel-frame-label">Milan Sai & Suraj</div></div>
+        <!-- duplicate for seamless -->
+        <div class="reel-frame"><img src="https://cdn.shopify.com/s/files/1/0822/4407/5755/files/Image9_scroll.jpg?v=1775971418" alt=""><div class="reel-frame-label">Arya & Federico</div></div>
+        <div class="reel-frame"><img src="https://cdn.shopify.com/s/files/1/0822/4407/5755/files/Image10_scroll.jpg?v=1775973212" alt=""><div class="reel-frame-label">Priya & Akshay</div></div>
+        <div class="reel-frame"><img src="https://cdn.shopify.com/s/files/1/0822/4407/5755/files/Image11_scroll.jpg?v=1775973212" alt=""><div class="reel-frame-label">Anushka & Virat</div></div>
+        <div class="reel-frame"><img src="https://cdn.shopify.com/s/files/1/0822/4407/5755/files/Image12_scroll.jpg?v=1775971427" alt=""><div class="reel-frame-label">Deepika & Ranveer</div></div>
+        <div class="reel-frame"><img src="https://cdn.shopify.com/s/files/1/0822/4407/5755/files/Image13_scroll.jpg?v=1775973212" alt=""><div class="reel-frame-label">Katrina & Vicky</div></div>
+        <div class="reel-frame"><img src="https://cdn.shopify.com/s/files/1/0822/4407/5755/files/Image14_scroll.jpg?v=1775973212" alt=""><div class="reel-frame-label">Shibani & Farhan</div></div>
+        <div class="reel-frame"><img src="https://cdn.shopify.com/s/files/1/0822/4407/5755/files/Image15_scroll.jpg?v=1775973212" alt=""><div class="reel-frame-label">Kiara & Sidharth</div></div>
+        <div class="reel-frame"><img src="https://cdn.shopify.com/s/files/1/0822/4407/5755/files/Image16_scroll.jpg?v=1775973211" alt=""><div class="reel-frame-label">Milan Sai & Suraj</div></div>
+     
+
+
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════
+  2. SCROLL COLOR-CHANGE + FULLSCREEN PHOTO ZOOM
+═══════════════════════════════ -->
+<section class="color-journey" id="color-journey">
+  <!-- Slide 1 -->
+  <div class="color-slide" data-bg="#f8f5ef">
+    <div class="slide-inner">
+      <div class="slide-photo-col"><img src="https://cdn.shopify.com/s/files/1/0822/4407/5755/files/Couple_Image1.jpg?v=1775973486" alt="Arya Federico" loading="lazy"></div>
+      <div class="slide-text-col">
+        <div class="slide-num reveal">01 / 05</div>
+        <h3 class="slide-title reveal d1">Arya &amp; Federico</h3>
+        <div class="slide-location reveal d2">Lake Como, Italy · June 2025</div>
+        <p class="slide-desc reveal d3">When a supermodel married her Italian Stallion on a horse ranch outside Milan, it was so dreamy they had two weddings. That Aalap on "Fools Rush In"? Absolute goosebumps.</p>
+        <a class="slide-link reveal d4" href="#" >Watch Film</a>
+        <!-- onclick="event.preventDefault();openModal('https://player.vimeo.com/video/1115761410')" -->
+      </div>
+    </div>
+  </div>
+  <!-- Slide 2 -->
+  <div class="color-slide" data-bg="#f5ede8">
+    <div class="slide-inner">
+      <div class="slide-photo-col"><img src="https://cdn.shopify.com/s/files/1/0822/4407/5755/files/Couple_Image2.jpg?v=1775973491" alt="Priya Akshay" loading="lazy"></div>
+      <div class="slide-text-col">
+        <div class="slide-num reveal">02 / 05</div>
+        <h3 class="slide-title reveal d1">Priya &amp; Akshay</h3>
+        <div class="slide-location reveal d2">Hyderabad, India · December 2024</div>
+        <p class="slide-desc reveal d3">Someone somewhere is made for you, but you have to open your heart to love like Priya and Akshay did. Love is not about finding the perfect person.</p>
+        <a class="slide-link reveal d4" href="#">Watch Film</a>
+         <!-- onclick="event.preventDefault();openModal('https://player.vimeo.com/video/1120076645')" -->
+      </div>
+    </div>
+  </div>
+  <!-- Slide 3 -->
+  <div class="color-slide" data-bg="#e8ecf0">
+    <div class="slide-inner">
+      <div class="slide-photo-col"><img src="https://cdn.shopify.com/s/files/1/0822/4407/5755/files/Couple_Image3.jpg?v=1775973573" alt="Apoorva Kshitij" loading="lazy"></div>
+      <div class="slide-text-col">
+        <div class="slide-num reveal">03 / 05</div>
+        <h3 class="slide-title reveal d1">Apoorva &amp; Kshitij</h3>
+        <div class="slide-location reveal d2">Uttarakhand · March 2025</div>
+        <p class="slide-desc reveal d3">Intimate, honest, filmed with a small crew, big hearts, and open skies. Somewhere between sunlight and song, we were reminded why we love what we do.</p>
+        <a class="slide-link reveal d4" href="#" >Watch Film</a>
+        <!-- onclick="event.preventDefault();openModal('https://player.vimeo.com/video/1145618395')" -->
+      </div>
+    </div>
+  </div>
+  <!-- Slide 4 -->
+  <div class="color-slide" data-bg="#eaf0e8">
+    <div class="slide-inner">
+      <div class="slide-photo-col"><img src="https://cdn.shopify.com/s/files/1/0822/4407/5755/files/Couple_Image4.jpg?v=1775973575" alt="Nikki Vishal" loading="lazy"></div>
+      <div class="slide-text-col">
+        <div class="slide-num reveal">04 / 05</div>
+        <h3 class="slide-title reveal d1">Nikki &amp; Vishal</h3>
+        <div class="slide-location reveal d2">India · March 2025</div>
+        <p class="slide-desc reveal d3">Now I know what it truly means to have a Wedding Filmer film — to feel it all over again. The love from our crew, friends, and family was overwhelming.</p>
+        <a class="slide-link reveal d4" href="#" >Watch Film</a>
+        <!-- onclick="event.preventDefault();openModal('https://player.vimeo.com/video/1100541792')" -->
+      </div>
+    </div>
+  </div>
+  <!-- Slide 5 -->
+  <!-- <div class="color-slide" data-bg="#f0ebe0">
+    <div class="slide-inner">
+      <div class="slide-photo-col"><img src="https://cdn.prod.website-files.com/658138cfb5ff0b77ba94f1a6/67122e5d8bbe2388db4952a7_Website-2.webp" alt="Faiz Fajr" loading="lazy"></div>
+      <div class="slide-text-col">
+        <div class="slide-num reveal">05 / 05</div>
+        <h3 class="slide-title reveal d1">Faiz &amp; Fajr</h3>
+        <div class="slide-location reveal d2">Bangalore · January 2014</div>
+        <p class="slide-desc reveal d3">Come and witness the Divine in this soul-stirring Eid film. A timeless piece that started it all and proved that wedding films can be pure cinema.</p>
+        <a class="slide-link reveal d4" href="#">Watch Film</a>
+      </div>
+    </div>
+  </div> -->
+</section>
+
+<!-- ─── STATS ─── -->
+<div class="stats-bar">
+  <div class="stat-item reveal"><span class="stat-num" data-target="13">0</span><span class="stat-label">Years of Storytelling</span></div>
+  <div class="stat-item reveal d1"><span class="stat-num" data-target="40">0</span><span class="stat-label">Countries Filmed In</span></div>
+  <div class="stat-item reveal d2"><span class="stat-num" data-target="500">0</span><span class="stat-label">Wedding Films</span></div>
+  <div class="stat-item reveal d3"><span class="stat-num" data-target="3">0</span><span class="stat-label">Netflix Features</span></div>
+</div>
+
+<!-- ─── TRAILERS ─── -->
+<section class="section" id="trailers" style="background:var(--ivory)">
+  <div class="reveal"><div class="section-label">Watch a Trailer</div></div>
+  <h2 class="section-title reveal d1">Our <em>Portfolio</em></h2>
+  <div class="trailer-tabs reveal d2">
+    <!-- Tab 1: Recents -->
+    <button class="tab-btn active" onclick="filterTrailers('all',this)">Recents</button>
+    <!-- Tab 2: Favourites -->
+    <button class="tab-btn" onclick="filterTrailers('favourites',this)">Favourites</button>
+    <!-- Tab 3: Pre-Wedding -->
+    <button class="tab-btn" onclick="filterTrailers('Pre-Wedding',this)">Pre-Wedding</button>
+    <!-- Tab 4: Corporate -->
+    <button class="tab-btn" onclick="filterTrailers('Corporate',this)">Corporate</button>
+    <!-- Tab 5: International -->
+    <button class="tab-btn" onclick="filterTrailers('international',this)">International</button>
+  </div>
+  <div class="trailers-grid reveal d3" id="trailersGrid"></div>
+  <div class="view-more-wrap reveal"><a href="#" class="view-more-btn">View All Films</a></div>
+</section> 
+
+<!-- ─── ABOUT HORIZONTAL ─── -->
+<section class="about-section" id="about">
+  <div class="about-inner">
+    <div class="about-text">
+      <div class="section-label reveal">TWF Around the World</div>
+      <h2 class="section-title reveal d1">Where we've <em>travelled</em></h2>
+      <p class="reveal d2">From intimate ceremonies in Goa to grand celebrations in Italy — across 40+ countries and 5 continents, Jonna Films has captured love in every form.</p>
+      <p class="reveal d3">Every frame is a testament: <strong>nothing is ever lost to us as long as we remember it.</strong></p>
+      <span class="signature reveal d4">— Jonna Thomas, Founder</span>
+      <div class="drag-hint reveal d5"><span>Drag to explore</span><span class="drag-hint-arrow">→</span></div>
+    </div>
+    <div class="h-scroll-track reveal-r" id="worldScroll">
+    <div class="h-card"><img src="https://cdn.shopify.com/s/files/1/0822/4407/5755/files/Couple_Image3.jpg?v=1775973573" alt="Tuscany"><div class="h-card-info"><div class="c-loc">Uttarakhand, India</div><div class="c-name">Anushka &amp; Virat</div></div></div>
+      <div class="h-card"><img src="https://cdn.shopify.com/s/files/1/0822/4407/5755/files/Couple_Image4.jpg?v=1775973575" alt="Lake Como"><div class="h-card-info"><div class="c-loc">India</div><div class="c-name">Nikki  &amp; Vishal</div></div></div>
+      
+      <div class="h-card"><img src="https://cdn.prod.website-files.com/658138cfb5ff0b77ba94f1a6/66b0aaa61989b74adb89ed40_W.avif" alt="Khandala"><div class="h-card-info"><div class="c-loc">Khandala, India</div><div class="c-name">Shibani &amp; Farhan</div></div></div>
+      <div class="h-card"><img src="https://cdn.prod.website-files.com/658138cfb5ff0b77ba94f1a6/6659a59f0182eef84bf27177_Untitleddesign.avif" alt="Ranthambore"><div class="h-card-info"><div class="c-loc">Ranthambore</div><div class="c-name">Katrina &amp; Vicky</div></div></div>
+     
+       <div class="h-card"><img src="https://cdn.shopify.com/s/files/1/0822/4407/5755/files/Couple_Image1.jpg?v=1775973486" alt="Vietnam"><div class="h-card-info"><div class="c-loc">Lake Como, Italy</div><div class="c-name">Arya &amp; Federico</div></div></div>
+      <div class="h-card"><img src="https://cdn.shopify.com/s/files/1/0822/4407/5755/files/Couple_Image2.jpg?v=1775973491" alt="Bali"><div class="h-card-info"><div class="c-loc">Hyderabad, India</div><div class="c-name">Priya  &amp; Akshay</div></div></div>
+  
+      <div class="h-card"><img src="https://cdn.prod.website-files.com/658138cfb5ff0b77ba94f1a6/66b0ae3bf54a94125185644b_W%20(5).avif" alt="Istanbul"><div class="h-card-info"><div class="c-loc">Istanbul, Turkey</div><div class="c-name">Pernia &amp; Sahil</div></div></div>
+      <!-- <div class="h-card"><img src="https://cdn.prod.website-files.com/658138cfb5ff0b77ba94f1a6/671a4c597870ce9a2ac66362_WEBSITE%20FILM%20COVER%20IMAGES%20-11.webp" alt="Rajasthan"><div class="h-card-info"><div class="c-loc">Rajasthan, India</div><div class="c-name">Kiara &amp; Sidharth</div></div></div> -->
+      <div class="h-card"><img src="https://cdn.prod.website-files.com/658138cfb5ff0b77ba94f1a6/672b0835546851ae6e16a9bd_W%20(6).webp" alt="Paris"><div class="h-card-info"><div class="c-loc">Paris, France</div><div class="c-name">Ayushi &amp; Shitiz</div></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════
+  4. VINTAGE MUSIC PLAYER + STORY
+═══════════════════════════════ -->
+
+<section class="section services-section" id="services">
+  <div class="section-label reveal">Our Services</div>
+  <h2 class="section-title reveal d1">Below are the <em>services we offer</em></h2>
+  <div class="services-grid reveal d2">
+    <div class="service-card reveal d1">
+      <img src="https://cdn.shopify.com/s/files/1/0822/4407/5755/files/Couple_Image1.jpg?v=1775973486" alt="Pre-wedding shoot">
+      <div class="service-card-title">Pre-wedding shoot</div>
+    </div>
+    <div class="service-card reveal d2">
+      <img src="https://cdn.shopify.com/s/files/1/0822/4407/5755/files/Couple_Image2.jpg?v=1775973491" alt="Wedding shoot">
+      <div class="service-card-title">Wedding shoot</div>
+    </div>
+    <div class="service-card reveal d3">
+      <img src="https://cdn.shopify.com/s/files/1/0822/4407/5755/files/Couple_Image3.jpg?v=1775973573" alt="Maternity shoot">
+      <div class="service-card-title">Maternity shoot</div>
+    </div>
+    <div class="service-card reveal d4">
+      <img src="https://cdn.shopify.com/s/files/1/0822/4407/5755/files/Couple_Image4.jpg?v=1775973575" alt="New born shoot">
+      <div class="service-card-title">New born shoot</div>
+    </div>
+
+
+
+
+
+    <div class="service-card reveal d5">
+      <img src="https://cdn.shopify.com/s/files/1/0822/4407/5755/files/Image1_scroll.jpg?v=1775973212" alt="Baby shoot">
+      <div class="service-card-title">Baby shoot</div>
+    </div>
+    <div class="service-card reveal d6">
+      <img src="https://cdn.shopify.com/s/files/1/0822/4407/5755/files/Image16_scroll.jpg?v=1775973211" alt="Birthday shoot">
+      <div class="service-card-title">Birthday shoot</div>
+    </div>
+    <div class="service-card reveal d7">
+      <img src="https://cdn.shopify.com/s/files/1/0822/4407/5755/files/Image15_scroll.jpg?v=1775973212" alt="Corporate Film shoot">
+      <div class="service-card-title">Corporate Film shoot</div>
+    </div>
+    <div class="service-card reveal d8">
+      <img src="https://cdn.shopify.com/s/files/1/0822/4407/5755/files/Image5_scroll.jpg?v=1775973212" alt="Ad shoot">
+      <div class="service-card-title">Ad shoot</div>
+    </div>
+    <div class="service-card reveal d9">
+      <img src="https://cdn.shopify.com/s/files/1/0822/4407/5755/files/Image6_scroll.jpg?v=1775971418" alt="Portfolio shoot">
+      <div class="service-card-title">Portfolio shoot</div>
+    </div>
+    <div class="service-card reveal d10">
+      <img src="https://cdn.shopify.com/s/files/1/0822/4407/5755/files/Image8_scroll.jpg?v=1775973212" alt="Events">
+      <div class="service-card-title">Events</div>
+    </div>
+  </div>
+</section> 
+
+
+
+
+
+
+
+
+
+<!-- ─── PULL QUOTE ─── -->
+<section class="quote-section">
+  <div class="quote-bg">Remember</div>
+  <span class="quote-mark reveal">"</span>
+  <p class="quote-text reveal d1">"Nothing is ever lost to us as long as we remember it."</p>
+  <div class="quote-attr reveal d2">— Jonna Films</div>
+</section>
+
+<!-- ─── PRESS ─── -->
+<section class="section" id="press" style="background:var(--ivory)">
+  <div class="reveal"><div class="section-label">As Seen In</div></div>
+  <h2 class="section-title reveal d1">In The <em>Spotlight</em></h2>
+  <div class="press-grid">
+    <div class="press-card reveal"><span class="press-badge">Netflix Documentary</span><div class="press-year">2024</div><h3>Featured in Nayanthara: Beyond the Fairy Tale</h3></div>
+    <div class="press-card reveal d1"><span class="press-badge">Amazon Prime Video</span><div class="press-year">2019</div><h3>Crafted the Opening Titles of Made in Heaven</h3></div>
+    <div class="press-card reveal d2"><span class="press-badge">Netflix Series</span><div class="press-year">2021</div><h3>Featured in Netflix's The Big Day</h3></div>
+    <div class="press-card reveal d3"><span class="press-badge">Sony Alpha</span><div class="press-year">2013</div><h3>Became Sony Alpha India Ambassadors</h3></div>
+    <div class="press-card reveal d4"><span class="press-badge">Industry First</span><div class="press-year">Since 2012</div><h3>Pioneers of Wedding Cinema in India</h3></div>
+    <div class="press-card reveal d5"><span class="press-badge">Global Reach</span><div class="press-year">Worldwide</div><h3>Filmed Across 40+ Countries &amp; 5 Continents</h3></div>
+  </div>
+</section>
+
+<!-- ─── CREW ─── -->
+<section class="crew-section">
+  <div style="padding:0 0 42px 0">
+    <div class="section-label reveal">The Team</div>
+    <h2 class="section-title reveal d1">Real Films Made By <em>Real Filmmakers</em></h2>
+  </div>
+  <div class="crew-scroll-outer" id="crewScroll">
+      <div class="crew-img-wrap"><video src="https://cdn.shopify.com/videos/c/o/v/3b280224edc34a8bbc01340b302471ec.mp4" autoplay muted loop playsinline></video></div>
+  <div class="crew-img-wrap"><video src="https://cdn.shopify.com/videos/c/o/v/3f31be2d37b64038a73be0d4ea171a56.mp4" autoplay muted loop playsinline></video></div>
+    <div class="crew-img-wrap"><video src="https://cdn.shopify.com/videos/c/o/v/7a872400fa264105ab1f2ad6b9ee2b9e.mp4" autoplay muted loop playsinline></video></div>
+          <div class="crew-img-wrap"><video src="https://cdn.shopify.com/videos/c/o/v/ce189ed00c3a4ca2844b9b781e737479.mp4" autoplay muted loop playsinline></video></div>
+
+
+                  <div class="crew-img-wrap"><video src="https://cdn.shopify.com/videos/c/o/v/a260c6dd987648b7be6b683d761907c6.mp4" autoplay muted loop playsinline></video></div>
+  <div class="crew-img-wrap"><video src="https://cdn.shopify.com/videos/c/o/v/f7a01d0ed260407faf6e172d1eb9d594.mp4" autoplay muted loop playsinline></video></div>
+    <div class="crew-img-wrap"><video src="https://cdn.shopify.com/videos/c/o/v/3dc2e8c874804cbbba885959432d7467.mp4" autoplay muted loop playsinline></video></div>
+          <div class="crew-img-wrap"><video src="https://cdn.shopify.com/videos/c/o/v/17252afc021645d190837c40b461eaf0.mp4" autoplay muted loop playsinline></video></div>
+  </div>
+</section>
+
+
+
+
+
+<!-- ─── TESTIMONIALS ─── -->
+<section class="section" style="background:var(--parchment)" id="testimonials">
+  <div class="reveal"><div class="section-label">Notes of Gratitude</div></div>
+  <h2 class="section-title reveal d1">What Our <em>Couples Say</em></h2>
+  <div class="testi-grid">
+    <div class="testi-card reveal"><div class="testi-star">★★★★★</div><p class="testi-quote">"It is pure beauty!! I watched it twice in a day and cried both times. You were right in how much thought, consideration and work has gone into making the movie."</p><div class="testi-name">Aayush &amp; Suman</div><div class="testi-role">TWF Groom · Mexico</div></div>
+    <div class="testi-card reveal d1"><div class="testi-star">★★★★★</div><p class="testi-quote">"Vishal, the video is amazing! Love every second and the music — it's so memorable and made me cry! Thank you for capturing such special moments."</p><div class="testi-name">PV Sindhu</div><div class="testi-role">Indian Badminton Champion · Udaipur</div></div>
+    <div class="testi-card reveal d2"><div class="testi-star">★★★★★</div><p class="testi-quote">"Vishal, this is so so beautiful. Shlok and I watched it, and we felt so special and emotional. Thank you so much for adding your magic to it."</p><div class="testi-name">Muskan Singhaniya</div><div class="testi-role">TWF Bride</div></div>
+    <div class="testi-card reveal d3"><div class="testi-star">★★★★★</div><p class="testi-quote">"Thank you so much for capturing such special moments. We cried every single time we watched it! Jonna Films truly brings your love story to life."</p><div class="testi-name">Mahek Singh</div><div class="testi-role">TWF Bride · Marrakech</div></div>
+  </div>
+</section>
+
+<!-- ─── CONTACT ─── -->
+<section class="contact-section" id="enquire">
+  <div class="section-label reveal">Book Us</div>
+  <h2 class="reveal d1">We'd love to hear<br><em>your story</em></h2>
+  <p class="reveal d2">Tell us about your wedding and we'll be in touch</p>
+  <div class="enquire-form reveal d3">
+    <form id="enquireForm" onsubmit="handleSubmit(event)">
+      <div class="form-row">
+        <input class="form-field" id="name" name="name" type="text" placeholder="Your Name" required>
+        <input class="form-field" id="email" name="email" type="email" placeholder="Your Email" required>
+      </div>
+      <div class="form-row">
+        <input class="form-field" id="date" name="date" placeholder="Wedding Date">
+        <input class="form-field" id="location" name="location" placeholder="Wedding Location">
+      </div>
+      <div class="form-row">
+        <textarea class="form-field full" id="story" name="story" placeholder="Tell us your story..."></textarea>
+      </div>
+      <button class="form-submit" type="submit">Send Enquiry →</button>
+    </form>
+    <div class="form-success" id="formSuccess">✓ &nbsp; Thank you! We'll be in touch soon.</div>
+  </div>
+</section>
+
+<!-- ─── FOOTER ─── -->
+<footer>
+  <div class="footer-grid">
+    <div>
+      <div class="footer-logo">Jonna <span>Films</span></div>
+      <div class="footer-tagline">Real Films · Real Filmmakers</div>
+      <p class="footer-desc">Crafting cinematic love stories across India and the world since 2012.</p>
+    </div>
+    <div>
+      <div class="f-col-title">Navigate</div>
+      <ul class="f-links">
+        <li><a href="#films">Films</a></li><li><a href="#trailers">Portfolio</a></li>
+        <li><a href="#about">About</a></li><li><a href="#music">Music</a></li>
+        <li><a href="#press">Press</a></li><li><a href="#enquire">Contact</a></li>
+      </ul>
+    </div>
+    <div>
+      <div class="f-col-title">Follow Us</div>
+      <div class="f-social">
+        <a href="https://instagram.com/" target="_blank">Instagram</a>
+        <a href="https://youtube.com" target="_blank">YouTube</a>
+        <a href="https://vimeo.com" target="_blank">Vimeo</a>
+      </div>
+      <div class="f-col-title" style="margin-top:24px">Location</div>
+      <p style="font-size:.6rem;color:rgba(255,255,255,.3);line-height:1.8">Bangalore, India<br>Filming worldwide since 2012</p>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>© 2025 Jonna Films. All rights reserved.</p>
+    <p>Designed with ♥ in Bangalore</p>
+  </div>
+</footer>
+
+<!-- ─── VIDEO MODAL ─── -->
+<div class="modal-overlay" id="modalOverlay" onclick="closeModal(event)">
+  <span class="modal-close" onclick="closeModalDirect()">×</span>
+  <div class="modal-video-wrap">
+    <iframe id="modalIframe" src="" allowfullscreen allow="autoplay; fullscreen" style="display:none"></iframe>
+    <video id="modalVideo" controls style="display:none" playsinline></video>
+  </div>
+</div>
+
+<script>
+
+  /* Add this script just before </body> — unpauses strips after images load */
+(function () {
+  const strips = document.querySelectorAll('.film-strip-inner');
+
+  // Collect all images inside the reel section
+  const reelImages = document.querySelectorAll('.reel-section img');
+  let loaded = 0;
+  const total = reelImages.length;
+
+  function unpause() {
+    strips.forEach(function (strip) {
+      // Only unpause if not currently hovered
+      if (!strip.matches(':hover')) {
+        strip.style.animationPlayState = 'running';
+      }
+    });
+  }
+
+  if (total === 0) {
+    unpause();
+    return;
+  }
+
+  reelImages.forEach(function (img) {
+    if (img.complete && img.naturalWidth > 0) {
+      // Already cached/loaded
+      loaded++;
+      if (loaded >= total) unpause();
+    } else {
+      img.addEventListener('load', function () {
+        loaded++;
+        if (loaded >= total) unpause();
+      });
+      img.addEventListener('error', function () {
+        // Don't block on broken images
+        loaded++;
+        if (loaded >= total) unpause();
+      });
+    }
+  });
+
+  // Safety fallback — unpause after 3s regardless
+  setTimeout(unpause, 3000);
+})();
+
+  const nav      = document.getElementById('mainNav');
+  const hamburger = document.getElementById('hamburger');
+  const overlay  = document.getElementById('mobileOverlay');
+  let menuOpen   = false;
+
+  // Scroll shrink
+  window.addEventListener('scroll', () => {
+    nav.classList.toggle('scrolled', window.scrollY > 40);
+  });
+
+  function toggleMenu() {
+    menuOpen = !menuOpen;
+    hamburger.classList.toggle('open', menuOpen);
+    overlay.classList.toggle('open', menuOpen);
+    document.body.style.overflow = menuOpen ? 'hidden' : '';
+  }
+
+  function closeMenu() {
+    if (!menuOpen) return;
+    menuOpen = false;
+    hamburger.classList.remove('open');
+    overlay.classList.remove('open');
+    document.body.style.overflow = '';
+  }
+
+  // Close on ESC
+  document.addEventListener('keydown', e => {
+    if (e.key === 'Escape') closeMenu();
+  });
+
+// ── NAV scroll
+// const nav = document.getElementById('mainNav');
+// window.addEventListener('scroll', () => nav.classList.toggle('scrolled', scrollY > 50));
+
+// // ── Mobile menu
+// function toggleMenu() { nav.classList.toggle('menu-open'); }
+// function closeMenu()  { nav.classList.remove('menu-open'); }
+
+// ── Intersection Observer (reveal)
+const io = new IntersectionObserver(entries => {
+  entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+}, { threshold: 0.1 });
+document.querySelectorAll('.reveal,.reveal-l,.reveal-r').forEach(el => io.observe(el));
+
+// ── Animated counters
+const cio = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if (!e.isIntersecting) return;
+    const el = e.target.querySelector('.stat-num[data-target]');
+    if (el && !el.dataset.done) {
+      el.dataset.done = '1';
+      const target = +el.dataset.target;
+      let v = 0;
+      const step = () => {
+        v = Math.min(v + Math.ceil(target / 55), target);
+        el.textContent = v + (target >= 40 ? '+' : '');
+        if (v < target) requestAnimationFrame(step);
+      };
+      requestAnimationFrame(step);
+    }
+  });
+}, { threshold: 0.5 });
+document.querySelectorAll('.stat-item').forEach(el => cio.observe(el));
+
+// ── COLOR CHANGE + FULLSCREEN PHOTO ZOOM on scroll
+const slides = document.querySelectorAll('.color-slide');
+const slideObs = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      e.target.classList.add('in-view');
+      document.body.style.backgroundColor = e.target.dataset.bg || '#f8f5ef';
+    } else {
+      e.target.classList.remove('in-view');
+    }
+  });
+}, { threshold: 0.45 });
+slides.forEach(s => slideObs.observe(s));
+
+// ── Drag scroll
+function dragScroll(el) {
+  let down = false, sx, sl;
+  el.addEventListener('mousedown', e => { down = true; sx = e.pageX - el.offsetLeft; sl = el.scrollLeft; });
+  el.addEventListener('mouseleave', () => down = false);
+  el.addEventListener('mouseup', () => down = false);
+  el.addEventListener('mousemove', e => { if (!down) return; e.preventDefault(); el.scrollLeft = sl - (e.pageX - el.offsetLeft - sx); });
+}
+dragScroll(document.getElementById('worldScroll'));
+dragScroll(document.getElementById('crewScroll'));
+
+// ── Trailers
+// Tab mapping:
+//   Tab 1 = Recents       = tag 'all'
+//   Tab 2 = Favourites    = tag 'favourites'
+//   Tab 3 = Pre-Wedding   = tag 'Pre-Wedding'
+//   Tab 4 = Corporate     = tag 'Corporate'
+//   Tab 5 = International = tag 'international'
+const trailers = [
+  // { name:'Aayush & Suman',    date:'NOV 2024', location:'Mexico',     tag:'all',           video:'https://cdn.shopify.com/videos/c/o/v/7df25afdcfa44b119513f460324f1159.mp4' },
+  // { name:'Dhrisha & Arun',    date:'JUN 2024', location:'Bodrum',     tag:'international', img:'https://cdn.prod.website-files.com/658138cfb5ff0b77ba94f1a6/671601ecffdb4e8b9ae8df39_Website.webp' },
+  // { name:'Mehak & Jay',       date:'JUN 2024', location:'Marrakech',  tag:'international', img:'https://cdn.prod.website-files.com/652e625ed083f8127673075c/67e2635979a7047719e40009_300x300.png' },
+  // { name:'Alpana & Yashraj',  date:'FEB 2024', location:'Aurangabad', tag:'all',           img:'https://cdn.prod.website-files.com/652e625ed083f8127673075c/675855fa7fdbb8b8299e9c47_alpana.webp' },
+  // { name:'Ridhi & Raj',       date:'DEC 2023', location:'Patna',      tag:'all',           img:'https://cdn.prod.website-files.com/652e625ed083f8127673075c/67583eb8e2f85f5b2d078b6c_YT%20Thumbnail%20-2.jpg' },
+  // { name:'Anita & Colm',      date:'JUL 2022', location:'Kent, UK',   tag:'international', img:'https://cdn.prod.website-files.com/652e625ed083f8127673075c/67584d8d8d35a17242d83e71_anita.avif' },
+  // { name:'Anushka & Virat',   date:'DEC 2017', location:'Tuscany',    tag:'Corporate',   img:'https://cdn.prod.website-files.com/652e625ed083f8127673075c/6758563415ee032506577218_anushka.avif' },
+  // { name:'Deepika & Ranveer', date:'NOV 2018', location:'Italy',      tag:'Corporate',   img:'https://cdn.prod.website-files.com/652e625ed083f8127673075c/67585645ee4aa7c4990e27e0_deepika.webp' },
+  // { name:'Faiz & Fajr',       date:'JAN 2014', location:'Bangalore',  tag:'favourites',    img:'https://cdn.prod.website-files.com/652e625ed083f8127673075c/67122e5d8bbe2388db4952a7_Website-2.webp' },
+  // { name:'Heartbeats',        date:'OCT 2012', location:'Goa',        tag:'favourites',    img:'https://cdn.prod.website-files.com/652e625ed083f8127673075c/6758550dfc8360bd9c198304_heartbeats%20.avif' },
+  // { name:'Gopalika & Dhruv',  date:'NOV 2020', location:'Agra',       tag:'Pre-Wedding',      img:'https://cdn.prod.website-files.com/652e625ed083f8127673075c/67ff99133251ae6bb5217610_Gopalika.webp' },
+  // { name:'Roma & Jaskaran',   date:'DEC 2019', location:'Oman',       tag:'Pre-Wedding',      img:'https://cdn.prod.website-files.com/652e625ed083f8127673075c/67ff991567fa35e096269f23_roma.webp' },
+  // Pre-Wedding videos below will appear only in Tab 3: Pre-Wedding
+  { name:'Aahina & Afraid', date:'PRE-WEDDING', location:'Video',    tag:'Pre-Wedding',      video:'https://cdn.shopify.com/videos/c/o/v/7df25afdcfa44b119513f460324f1159.mp4' },
+  { name:'Arpita & Tarun', date:'PRE-WEDDING', location:'Video',    tag:'Pre-Wedding',      video:'https://cdn.shopify.com/videos/c/o/v/53aa8a376e874ab9ad8ab453e6537b89.mp4' },
+    { name:'Harshitha & Karan', date:'PRE-WEDDING', location:'Video',    tag:'Pre-Wedding',      video:'https://cdn.shopify.com/videos/c/o/v/ff95949966b84e8ab0c4e990b0365a04.mp4' },
+
+  { name:'Corporate 1', date:'Corporate', location:'Video',    tag:'Corporate',      video:'https://cdn.shopify.com/videos/c/o/v/7a872400fa264105ab1f2ad6b9ee2b9e.mp4' },
+];
+function renderTrailers(filter) {
+  const grid = document.getElementById('trailersGrid');
+  const data = filter === 'all' ? trailers : trailers.filter(t => t.tag === filter || t.tag === 'all');
+  grid.innerHTML = data.map(t => `
+    <div class="trailer-card"${t.video ? ` data-video="${t.video}"` : ''}>
+      ${t.video ? `<video class="trailer-thumb" poster="${t.img || ''}" muted playsinline preload="metadata"><source src="${t.video}" type="video/mp4"></video>` : `<img src="${t.img}" alt="${t.name}" loading="lazy">`}
+      <div class="trailer-overlay">
+        <div class="t-date">${t.date}</div>
+        <div class="t-location">${t.location}</div>
+        <div class="t-name">${t.name}</div>
+      </div>
+      ${t.video ? `<div class="t-play"><svg viewBox="0 0 24 24"><polygon points="5,3 19,12 5,21"/></svg></div>` : ''}
+    </div>`).join('');
+  grid.querySelectorAll('.trailer-card').forEach((el, i) => {
+    if (el.dataset.video) {
+      el.addEventListener('click', () => openModal(el.dataset.video));
+      const thumb = el.querySelector('.trailer-thumb');
+      if (thumb) {
+        thumb.addEventListener('loadedmetadata', () => {
+          if (thumb.duration > 10) {
+            thumb.currentTime = 10;
+          } else {
+            thumb.currentTime = 0;
+          }
+        });
+        thumb.addEventListener('seeked', () => thumb.pause());
+      }
+    }
+    el.style.cssText = `opacity:0;transform:translateY(18px);transition:opacity .5s ${i*.06}s,transform .5s ${i*.06}s`;
+    setTimeout(() => { el.style.opacity='1'; el.style.transform='translateY(0)'; }, 60);
+  });
+}
+function filterTrailers(f, btn) {
+  document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active'); renderTrailers(f);
+}
+renderTrailers('all');
+
+// ── Modal
+function openModal(url) {
+  const iframe = document.getElementById('modalIframe');
+  const video = document.getElementById('modalVideo');
+  if (/\.(mp4|webm|ogg)([?#].*)?$/i.test(url)) {
+    iframe.style.display = 'none';
+    iframe.src = '';
+    video.style.display = 'block';
+    video.src = url;
+    video.autoplay = true;
+    video.muted = false;
+    video.playsInline = true;
+    video.load();
+    video.play().catch(() => {});
+  } else {
+    video.style.display = 'none';
+    video.pause();
+    video.src = '';
+    iframe.style.display = 'block';
+    iframe.src = url + (url.includes('?') ? '&' : '?') + 'autoplay=1';
+  }
+  document.getElementById('modalOverlay').classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+function closeModal(e) { if (e.target.id === 'modalOverlay') closeModalDirect(); }
+function closeModalDirect() {
+  const iframe = document.getElementById('modalIframe');
+  const video = document.getElementById('modalVideo');
+  iframe.src = '';
+  iframe.style.display = 'none';
+  video.pause();
+  video.src = '';
+  video.style.display = 'none';
+  document.getElementById('modalOverlay').classList.remove('open');
+  document.body.style.overflow = '';
+}
+document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModalDirect(); });
+
+// ── Form
+function handleSubmit(e) {
+  e.preventDefault();
+
+  const form = document.getElementById('enquireForm');
+  const name = document.getElementById('name').value.trim();
+  const email = document.getElementById('email').value.trim();
+  const date = document.getElementById('date').value.trim();
+  const location = document.getElementById('location').value.trim();
+  const story = document.getElementById('story').value.trim();
+
+  const message = [
+    'Hello Jonna Films,',
+    '',
+    'I would like to enquire about my wedding film.',
+    '',
+    `Name: ${name}`,
+    `Email: ${email}`,
+    `Wedding Date: ${date || 'Not provided'}`,
+    `Wedding Location: ${location || 'Not provided'}`,
+    `Story: ${story || 'Not provided'}`
+  ].join('\n');
+
+  const whatsappUrl = `https://wa.me/8951815656?text=${encodeURIComponent(message)}`;
+  window.open(whatsappUrl, '_blank');
+
+  form.style.display = 'none';
+  document.getElementById('formSuccess').style.display = 'block';
+}
+
+// ══════════════════════════════════
+// VINTAGE MUSIC PLAYER (simulated)
+// ══════════════════════════════════
+const tracks = [
+  { title:'Ik Onkar',               artist:'Harshdeep Kaur & Devender Pal Singh', dur:252 },
+  { title:'Vekheya Reprise',        artist:'By Vibha',                           dur:208 },
+  { title:'Tu Mila',                artist:'By Riya Goley',                      dur:235 },
+  { title:'Panaah',                 artist:'Mayank Choudhary',                   dur:242 },
+  { title:'Sahib Sahiba',           artist:'Digvijay Singh & Shaoni Mojumdar',   dur:314 },
+];
+let currentTrack = 0, playing = false, progress = 0, timer = null;
+
+// build waveform bars
+const waveEl = document.getElementById('waveform');
+for (let i = 0; i < 32; i++) {
+  const b = document.createElement('div');
+  b.style.cssText = `width:3px;background:rgba(155,28,28,.5);border-radius:1px;height:${Math.random()*20+6}px;transition:height .15s`;
+  waveEl.appendChild(b);
+}
+
+function animateWave() {
+  if (!playing) return;
+  waveEl.querySelectorAll('div').forEach(b => {
+    b.style.height = (Math.random() * 20 + 4) + 'px';
+    b.style.background = `rgba(155,28,28,${0.4 + Math.random()*.5})`;
+  });
+  setTimeout(animateWave, 180);
+}
+
+function setTrackUI() {
+  const t = tracks[currentTrack];
+  document.getElementById('nowTitle').textContent = t.title;
+  document.getElementById('nowArtist').textContent = t.artist;
+  document.getElementById('progTotal').textContent = fmt(t.dur);
+  document.getElementById('progFill').style.width = '0%';
+  document.getElementById('progCurrent').textContent = '0:00';
+  document.querySelectorAll('.v-track').forEach((el, i) => el.classList.toggle('active', i === currentTrack));
+  progress = 0;
+}
+
+function fmt(s) { return Math.floor(s/60) + ':' + String(s%60).padStart(2,'0'); }
+
+function togglePlay() {
+  playing = !playing;
+  const icon = document.getElementById('playIcon');
+  icon.innerHTML = playing
+    ? '<rect x="6" y="4" width="4" height="16"/><rect x="14" y="4" width="4" height="16"/>'
+    : '<polygon points="5,3 19,12 5,21"/>';
+  document.getElementById('vinylRecord').classList.toggle('playing', playing);
+  if (playing) { startProgress(); animateWave(); }
+  else { clearInterval(timer); }
+}
+
+function startProgress() {
+  clearInterval(timer);
+  const dur = tracks[currentTrack].dur;
+  timer = setInterval(() => {
+    if (!playing) return;
+    progress = Math.min(progress + 1, dur);
+    const pct = (progress / dur) * 100;
+    document.getElementById('progFill').style.width = pct + '%';
+    document.getElementById('progCurrent').textContent = fmt(progress);
+    if (progress >= dur) { nextTrack(); }
+  }, 1000);
+}
+
+function selectTrack(i, el) {
+  currentTrack = i;
+  setTrackUI();
+  if (playing) { clearInterval(timer); startProgress(); animateWave(); }
+  else { togglePlay(); }
+}
+
+function nextTrack() {
+  currentTrack = (currentTrack + 1) % tracks.length;
+  setTrackUI();
+  if (playing) startProgress();
+}
+function prevTrack() {
+  if (progress > 4) { progress = 0; setTrackUI(); if (playing) startProgress(); return; }
+  currentTrack = (currentTrack - 1 + tracks.length) % tracks.length;
+  setTrackUI();
+  if (playing) startProgress();
+}
+function seekTrack(e) {
+  const rect = e.currentTarget.getBoundingClientRect();
+  const pct = (e.clientX - rect.left) / rect.width;
+  progress = Math.floor(pct * tracks[currentTrack].dur);
+  document.getElementById('progFill').style.width = (pct * 100) + '%';
+  document.getElementById('progCurrent').textContent = fmt(progress);
+}
+
+// hero parallax
+window.addEventListener('scroll', () => {
+  const bg = document.querySelector('.hero-bg');
+  if (bg) bg.style.transform = `translateY(${scrollY * 0.22}px)`;
+}, { passive:true });
+</script>
+</body>
+</html>
